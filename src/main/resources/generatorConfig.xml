@@ -1,55 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC
- "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
- "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
+    <!--引入外部配置文件-->
+    <properties resource="config.properties"/>
 
-	<!--配置jdbc驱动路径-->
-	<classPathEntry
-		location="C:\Users\26093\.m2\repository\mysql\mysql-connector-java\8.0.17\mysql-connector-java-8.0.17.jar" />
+    <!--配置jdbc驱动路径-->
+    <classPathEntry
+            location="C:\Users\26093\.m2\repository\mysql\mysql-connector-java\8.0.17\mysql-connector-java-8.0.17.jar"/>
 
-	<context id="mysql" targetRuntime="MyBatis3">
+    <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
 
-		<commentGenerator>
-			<property name="suppressDate" value="true" />
-			<property name="suppressAllComments" value="true" />
-		</commentGenerator>
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
 
-		<!-- 配置数据库连接 -->
-		<jdbcConnection
-			connectionURL="jdbc:mysql://localhost:3306/dbname"
-			driverClass="com.mysql.cj.jdbc.Driver" password="xxxx"
-			userId="root" />
+        <!-- 配置数据库连接 -->
+        <jdbcConnection
+                connectionURL="${jdbc.url}"
+                driverClass="${jdbc.driverClass}" password="${jdbc.password}"
+                userId="${jdbc.username}"/>
 
-		<javaTypeResolver>
-			<property name="forceBigDecimals" value="false" />
-		</javaTypeResolver>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
 
-		<!--生成Model类存放位置 -->
-		<javaModelGenerator targetPackage="com.modao.service.member.model"
-			targetProject="src/main/java">
-			<property name="enableSubPackages" value="true" />
-			<property name="trimStrings" value="true" />
-		</javaModelGenerator>
-		<!--生成映射文件存放位置 -->
-		<sqlMapGenerator targetPackage="com.modao.service.member.mapper"
-			targetProject="src/main/java">
-			<property name="enableSubPackages" value="true" />
-		</sqlMapGenerator>
-		<!--生成Dao类存放位置 -->
-		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.modao.service.member.dao" targetProject="src/main/java">
-			<property name="enableSubPackages" value="true" />
-		</javaClientGenerator>
+        <!--生成实体类存放位置 -->
+        <javaModelGenerator targetPackage="${model.targetPackage}" targetProject="${targetProject}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成mapper.xml存放位置 -->
+        <sqlMapGenerator targetPackage="${map.targetPackage}" targetProject="${targetProject}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成mapper接口存放位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${client.targetPackage}" targetProject="${targetProject}">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
 
-		<!--配置要生成的表及对应转换后的实体,是否生成指定curd方法  -->
-		<table tableName="t_member_delivery_address" domainObjectName="MemberDeliveryAddress" 
-			enableCountByExample="false"
-			enableUpdateByExample="false" 
-			enableDeleteByExample="false"
-			enableSelectByExample="false" 
-			selectByExampleQueryId="false">
-			<property name="useActualColumnNames" value="false" />
-		</table>
-	</context>
+        <!--配置要生成的表及对应转换后的实体,是否生成指定curd方法  -->
+        <table tableName="%"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+    </context>
 </generatorConfiguration>

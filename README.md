@@ -11,3 +11,5 @@ mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 [Running MyBatis Generator With Maven](http://mybatis.org/generator/running/runningWithMaven.html)
  
 [MyBatis GeneratorXML Configuration File Reference](http://mybatis.org/generator/configreference/xmlconfig.html)
+ 
+[中文参考](https://gitee.com/free/Mybatis_Utils/blob/master/MybatisGeneator/MybatisGeneator.md)
