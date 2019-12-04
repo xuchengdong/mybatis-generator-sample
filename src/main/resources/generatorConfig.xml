@@ -13,7 +13,16 @@
     <context id="mysql" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8"/>
         <!--配置是否使用通用 Mapper 自带的注释扩展，默认 true-->
-        <property name="useMapperCommentGenerator" value="false"/>
+        <!--<property name="useMapperCommentGenerator" value="false"/>-->
+
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
@@ -32,7 +41,8 @@
                 driverClass="${jdbc.driverClass}" password="${jdbc.password}"
                 userId="${jdbc.username}"/>
 
-        <javaTypeResolver>
+        <!--自定义类型转换-->
+        <javaTypeResolver type="org.mybatis.generator.generator.MyJavaTypeResolverImpl">
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
@@ -51,14 +61,16 @@
         </javaClientGenerator>
 
         <!--配置要生成的表及对应转换后的实体,是否生成指定curd方法  -->
-        <table tableName="r_order%"
+        <table tableName="t_member%"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
                selectByExampleQueryId="false">
             <property name="useActualColumnNames" value="false"/>
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+            <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+            <!--替换表前缀,注意表前缀首字母大写且不能加下划线, 存在一个问题:除了首字母大写其他全部变成了小写,不是驼峰命名了-->
+            <!--<domainObjectRenamingRule searchString="^T" replaceString=""/>-->
         </table>
     </context>
 </generatorConfiguration>
